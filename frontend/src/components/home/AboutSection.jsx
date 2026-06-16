@@ -17,93 +17,205 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="pt-32 sm:pt-40 pb-20 sm:pb-28 bg-brand-cream">
-      <div className="container-tight">
+    <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 bg-brand-cream relative overflow-hidden">
+      {/* Decorative Elements */}
+      <motion.div
+        animate={{ 
+          rotate: [0, 360],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="absolute top-20 right-10 w-32 h-32 border-4 border-brand-gold/10 rounded-full"
+      />
+      <motion.div
+        animate={{ 
+          rotate: [360, 0],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="absolute bottom-20 left-10 w-24 h-24 border-4 border-brand-gold/10 rounded-full"
+      />
+
+      <div className="container-tight relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Image Section with Advanced Animations */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -80, rotateY: -15 }}
+            whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative"
           >
-            <div className="relative rounded-sm overflow-hidden">
-              <img
+            <div className="relative rounded-sm overflow-hidden group">
+              <motion.img
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.6 }}
                 src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
                 alt="Construction team at work"
                 className="w-full h-[400px] sm:h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black/40 to-transparent" />
+              
+              {/* Hover Overlay */}
+              <motion.div
+                className="absolute inset-0 bg-brand-gold/20"
+                initial={{ opacity: 0 }}
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
             </div>
 
+            {/* Experience Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.5, rotate: -45 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="absolute -bottom-6 -right-4 sm:-right-8 bg-brand-gold text-brand-black p-6 sm:p-8 rounded-sm shadow-xl"
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.3,
+                type: "spring",
+                stiffness: 200
+              }}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="absolute -bottom-6 -right-4 sm:-right-8 bg-brand-gold text-brand-black p-6 sm:p-8 rounded-sm shadow-xl cursor-pointer"
             >
-              <p className="font-display text-4xl sm:text-5xl font-bold">10+</p>
+              <motion.p 
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6, type: "spring" }}
+                className="font-display text-4xl sm:text-5xl font-bold"
+              >
+                10+
+              </motion.p>
               <p className="font-body text-sm font-semibold uppercase tracking-wider">Years Of Experience</p>
             </motion.div>
 
-            <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-brand-gold/30 rounded-sm -z-10" />
+            {/* Decorative Corner Frame */}
+            <motion.div 
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="absolute -top-4 -left-4 w-24 h-24 border-2 border-brand-gold/30 rounded-sm -z-10" 
+            />
+            <motion.div 
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="absolute -bottom-4 -right-4 w-20 h-20 border-2 border-brand-gold/20 rounded-sm -z-10" 
+            />
           </motion.div>
 
+          {/* Content Section */}
           <div>
-            <SectionHeading
-              subtitle="About Us"
-              title="Trusted Construction Experts Delivering Quality Homes"
-              description="With years of industry experience, Taaj Constructions Ltd specializes in building high-quality residential properties that combine durability, functionality, and modern design."
-            />
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <SectionHeading
+                subtitle="About Us"
+                title="Trusted Construction Experts Delivering Quality Homes"
+                description="With years of industry experience, Taaj Constructions Ltd specializes in building high-quality residential properties that combine durability, functionality, and modern design."
+              />
+            </motion.div>
 
+            {/* Feature List with Stagger Animation */}
             <ul className="mt-8 space-y-4">
               {features.map((feature, i) => (
                 <motion.li
                   key={feature}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex items-center gap-3"
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  whileHover={{ x: 10, transition: { duration: 0.2 } }}
+                  className="flex items-center gap-3 group cursor-pointer"
                 >
-                  <FaCheckCircle className="text-brand-gold flex-shrink-0" />
-                  <span className="font-body text-gray-700">{feature}</span>
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.15 + 0.2, type: "spring", stiffness: 200 }}
+                  >
+                    <FaCheckCircle className="text-brand-gold flex-shrink-0 group-hover:scale-125 transition-transform" />
+                  </motion.div>
+                  <span className="font-body text-gray-700 group-hover:text-brand-black transition-colors">{feature}</span>
                 </motion.li>
               ))}
             </ul>
 
+            {/* Stats Grid with Counter Animation */}
             <div className="grid grid-cols-2 gap-6 mt-10">
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center p-4 bg-white rounded-sm shadow-sm border border-gray-100">
-                  <p className="font-display text-3xl sm:text-4xl font-bold text-brand-gold">
+              {stats.map((stat, i) => (
+                <motion.div 
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.2, duration: 0.6 }}
+                  whileHover={{ y: -5, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
+                  className="text-center p-4 bg-white rounded-sm shadow-sm border border-gray-100 cursor-pointer"
+                >
+                  <motion.p 
+                    whileHover={{ scale: 1.1 }}
+                    className="font-display text-3xl sm:text-4xl font-bold text-brand-gold"
+                  >
                     <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-                  </p>
+                  </motion.p>
                   <p className="text-sm text-gray-600 font-body mt-1">{stat.label}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            <p className="mt-8 text-gray-600 font-body leading-relaxed text-sm sm:text-base">
+            {/* Description Text */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="mt-8 text-gray-600 font-body leading-relaxed text-sm sm:text-base"
+            >
               From new home construction to renovations and extensions, our skilled team is committed to delivering projects on time, within budget, and to the highest standards.
-            </p>
+            </motion.p>
 
-            <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div className="flex items-center gap-4">
-                <img
+            {/* CEO Section & CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6 }}
+              className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-6"
+            >
+              <motion.div 
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-4 cursor-pointer"
+              >
+                <motion.img
+                  whileHover={{ scale: 1.1, rotate: 5 }}
                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80"
                   alt="CEO"
                   className="w-14 h-14 rounded-full object-cover border-2 border-brand-gold"
                 />
                 <div>
-                  <p className="font-display font-bold text-brand-black">John Doe</p>
+                  <motion.p 
+                    whileHover={{ color: "#DAA520" }}
+                    className="font-display font-bold text-brand-black"
+                  >
+                    John Doe
+                  </motion.p>
                   <p className="text-sm text-gray-500 font-body">CEO</p>
                 </div>
-              </div>
-              <Button to="/about" variant="outlineDark" size="sm">
-                More About Us
-              </Button>
-            </div>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button to="/about" variant="outlineDark" size="sm">
+                  More About Us
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>

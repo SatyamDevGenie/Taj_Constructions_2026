@@ -37,37 +37,89 @@ export default function Services() {
             viewport={{ once: true }}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {services.map((service) => (
+            {services.map((service, index) => (
               <motion.div
                 key={service.id}
                 variants={fadeUp}
-                className="group bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                custom={index}
+                whileHover={{ y: -15, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="group bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-2xl border border-gray-100 hover:border-brand-gold/30 relative"
               >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/70 to-transparent" />
-                  <span className="absolute top-4 left-4 font-display text-4xl font-bold text-brand-gold">
+                {/* Number Badge */}
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
+                  className="absolute top-4 left-4 z-20 w-14 h-14 bg-brand-gold rounded-full flex items-center justify-center shadow-lg"
+                >
+                  <span className="font-display text-xl font-bold text-brand-black">
                     {service.number}
                   </span>
+                </motion.div>
+
+                <div className="relative h-56 overflow-hidden">
+                  <motion.img
+                    whileHover={{ scale: 1.2, rotate: 3 }}
+                    transition={{ duration: 0.6 }}
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/70 to-transparent" />
+                  
+                  {/* Shine Effect on Hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.7 }}
+                  />
                 </div>
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-bold text-brand-black mb-3 group-hover:text-brand-gold transition-colors">
+                
+                <div className="p-6 relative">
+                  <motion.h3
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.2 }}
+                    className="font-display text-xl font-bold text-brand-black mb-3 group-hover:text-brand-gold transition-colors"
+                  >
                     {service.title}
-                  </h3>
-                  <p className="text-gray-600 font-body text-sm leading-relaxed mb-4">
+                  </motion.h3>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.3 }}
+                    className="text-gray-600 font-body text-sm leading-relaxed mb-4"
+                  >
                     {service.description}
-                  </p>
+                  </motion.p>
                   <Link
                     to={`/services/${service.slug}`}
                     className="inline-flex items-center gap-2 text-brand-gold text-sm font-body font-semibold uppercase tracking-wider group/link"
                   >
                     View Details
-                    <HiArrowRight className="group-hover/link:translate-x-1 transition-transform" />
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <HiArrowRight className="group-hover/link:translate-x-2 transition-transform" />
+                    </motion.span>
                   </Link>
+
+                  {/* Corner Decoration */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 + 0.4 }}
+                    className="absolute bottom-0 right-0 w-16 h-16 opacity-5"
+                  >
+                    <div className="absolute bottom-0 right-0 w-full h-full border-b-4 border-r-4 border-brand-gold rounded-tl-full" />
+                  </motion.div>
                 </div>
               </motion.div>
             ))}

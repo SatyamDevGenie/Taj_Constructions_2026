@@ -59,15 +59,22 @@ export default function Contact() {
             {contactCards.map((card, i) => (
               <motion.div
                 key={card.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-6 bg-white rounded-sm border border-gray-100 text-center hover:shadow-lg hover:border-brand-gold/30 transition-all duration-300 group"
+                transition={{ delay: i * 0.1, type: "spring", stiffness: 200 }}
+                whileHover={{ y: -10, scale: 1.05 }}
+                className="p-6 bg-white rounded-sm border border-gray-100 text-center hover:shadow-xl hover:border-brand-gold/30 transition-all duration-300 group cursor-pointer"
               >
-                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-brand-gold/10 group-hover:bg-brand-gold transition-colors">
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 + 0.2, type: "spring", stiffness: 200 }}
+                  className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-brand-gold/10 group-hover:bg-brand-gold transition-colors"
+                >
                   <card.icon className="text-xl text-brand-gold group-hover:text-brand-black transition-colors" />
-                </div>
+                </motion.div>
                 <h3 className="font-display font-bold text-brand-black mb-2">{card.title}</h3>
                 {card.href ? (
                   <a href={card.href} className="text-gray-600 hover:text-brand-gold font-body text-sm transition-colors">

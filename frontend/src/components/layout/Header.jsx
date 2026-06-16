@@ -50,20 +50,32 @@ export default function Header() {
   }, [isOpen]);
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`sticky top-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-brand-black/95 backdrop-blur-xl shadow-2xl shadow-black/30"
-          : "bg-brand-black"
+          ? "bg-brand-black/95 backdrop-blur-xl shadow-2xl shadow-black/30 py-3 lg:py-3"
+          : "bg-brand-black py-4 lg:py-5"
       }`}
     >
-      <div className="container-tight flex items-center justify-between py-4 lg:py-5">
-        <Logo />
+      <div className="container-tight flex items-center justify-between">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <Logo />
+        </motion.div>
 
         <nav className="hidden xl:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <div
+          {navLinks.map((link, index) => (
+            <motion.div
               key={link.label}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + index * 0.05, duration: 0.5 }}
               className="relative"
               onMouseEnter={() => link.children && setOpenDropdown(link.label)}
               onMouseLeave={() => setOpenDropdown(null)}
@@ -104,7 +116,7 @@ export default function Header() {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ))}
         </nav>
 
@@ -164,6 +176,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }
