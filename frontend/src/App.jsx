@@ -1,19 +1,38 @@
-// App.jsx
-import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import ServiceDetail from "./pages/ServiceDetail";
+import Projects from "./pages/Projects";
+import Blogs from "./pages/Blogs";
+import BlogDetail from "./pages/BlogDetail";
+import Contact from "./pages/Contact";
+import Process from "./pages/Process";
+import Testimonials from "./pages/Testimonials";
+import Faqs from "./pages/Faqs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      {/* Test Card */}
-      <div className="p-6 rounded-xl shadow-lg bg-white">
-        <h1 className="text-3xl font-bold text-blue-600 mb-2">
-          Tailwind is Working!
-        </h1>
-        <p className="text-gray-700">
-          If you see blue text, rounded corners, and shadow — Tailwind is properly configured.
-        </p>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="services" element={<Services />} />
+          <Route path="services/:slug" element={<ServiceDetail />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="blogs/:slug" element={<BlogDetail />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="process" element={<Process />} />
+          <Route path="testimonials" element={<Testimonials />} />
+          <Route path="faqs" element={<Faqs />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
