@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaPlay, FaArrowRight } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Button from "../ui/Button";
-import Hero3D from "../3d/Hero3D";
+import Hero3DCanvas from "../3d/Hero3DCanvas";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -32,10 +32,8 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[90vh] lg:min-h-screen flex items-center overflow-hidden">
-      {/* 3D Canvas Background */}
-      <div className="absolute inset-0 z-0">
-        <Hero3D mousePosition={mousePosition} scrollProgress={scrollProgress} />
-      </div>
+      {/* Premium 3D Canvas Background */}
+      <Hero3DCanvas mousePosition={mousePosition} scrollProgress={scrollProgress} />
 
       {/* Animated Background with Parallax */}
       <div className="absolute inset-0 z-[1] pointer-events-none">

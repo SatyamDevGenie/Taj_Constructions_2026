@@ -4,12 +4,19 @@ import { FaArrowRight } from "react-icons/fa";
 import SectionHeading from "../ui/SectionHeading";
 import { projects } from "../../data/projects";
 import { Link } from "react-router-dom";
+import Section3DWrapper from "../3d/Section3DWrapper";
+import Projects3DScene from "../3d/Projects3DScene";
 
 export default function ProjectsSection() {
   const [active, setActive] = useState(0);
 
   return (
     <section className="py-20 sm:py-28 bg-brand-cream relative overflow-hidden">
+      {/* Premium 3D Gallery Scene */}
+      <Section3DWrapper className="absolute inset-0 z-0 opacity-25">
+        <Projects3DScene />
+      </Section3DWrapper>
+
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <motion.div

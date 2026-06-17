@@ -5,15 +5,16 @@ import SectionHeading from "../ui/SectionHeading";
 import Button from "../ui/Button";
 import { blogs } from "../../data/blogs";
 import { fadeUp, staggerContainer } from "../../utils/animations";
-import FloatingCity3D from "../3d/FloatingCity3D";
+import Section3DWrapper from "../3d/Section3DWrapper";
+import CTA3DScene from "../3d/CTA3DScene";
 
 export default function CtaSection() {
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden">
-      {/* 3D City Background */}
-      <div className="absolute inset-0 opacity-20">
-        <FloatingCity3D />
-      </div>
+      {/* Premium 3D CTA Scene */}
+      <Section3DWrapper className="absolute inset-0 z-0 opacity-30">
+        <CTA3DScene />
+      </Section3DWrapper>
 
       {/* Parallax Background */}
       <motion.div 

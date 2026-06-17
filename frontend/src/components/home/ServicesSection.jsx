@@ -6,6 +6,8 @@ import SectionHeading from "../ui/SectionHeading";
 import { services } from "../../data/services";
 import { staggerContainer, fadeUp } from "../../utils/animations";
 import ServiceCard3D from "../3d/ServiceCard3D";
+import Section3DWrapper from "../3d/Section3DWrapper";
+import Services3DScene from "../3d/Services3DScene";
 
 export default function ServicesSection() {
   const featured = services.slice(0, 6);
@@ -18,6 +20,11 @@ export default function ServicesSection() {
 
   return (
     <section className="py-20 sm:py-28 bg-brand-black relative overflow-hidden">
+      {/* Premium 3D Background Scene */}
+      <Section3DWrapper className="absolute inset-0 z-0 opacity-20">
+        <Services3DScene activeService={hoveredCard} />
+      </Section3DWrapper>
+
       {/* Animated Background Blobs */}
       <div className="absolute inset-0 opacity-5">
         <motion.div 

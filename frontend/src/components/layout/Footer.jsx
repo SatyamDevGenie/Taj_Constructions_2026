@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaWhatsapp, FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 import { quickLinks, footerServices, contactInfo, socialLinks } from "../../data/navigation";
+import Section3DWrapper from "../3d/Section3DWrapper";
+import Footer3DScene from "../3d/Footer3DScene";
 
 const iconMap = {
   facebook: FaFacebookF,
@@ -14,6 +16,11 @@ const iconMap = {
 export default function Footer() {
   return (
     <footer className="bg-brand-black text-white relative overflow-hidden">
+      {/* Premium 3D Footer Scene */}
+      <Section3DWrapper className="absolute inset-0 z-0 opacity-15">
+        <Footer3DScene />
+      </Section3DWrapper>
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <motion.div

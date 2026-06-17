@@ -3,7 +3,8 @@ import { FaCheckCircle } from "react-icons/fa";
 import SectionHeading from "../ui/SectionHeading";
 import Button from "../ui/Button";
 import { AnimatedCounter } from "../../utils/animations";
-import AboutBackground3D from "../3d/AboutBackground3D";
+import Section3DWrapper from "../3d/Section3DWrapper";
+import About3DScene from "../3d/About3DScene";
 
 const stats = [
   { value: 98, suffix: "%", label: "Successful Projects" },
@@ -19,10 +20,10 @@ export default function AboutSection() {
 
   return (
     <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 bg-brand-cream relative overflow-hidden">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <AboutBackground3D />
-      </div>
+      {/* Premium 3D Background */}
+      <Section3DWrapper className="absolute inset-0 z-0 opacity-30">
+        <About3DScene />
+      </Section3DWrapper>
 
       {/* Decorative Elements */}
       <motion.div
