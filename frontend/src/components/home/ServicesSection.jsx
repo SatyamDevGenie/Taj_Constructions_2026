@@ -1,12 +1,20 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { HiArrowRight } from "react-icons/hi";
+import { useState } from "react";
 import SectionHeading from "../ui/SectionHeading";
 import { services } from "../../data/services";
 import { staggerContainer, fadeUp } from "../../utils/animations";
+import ServiceCard3D from "../3d/ServiceCard3D";
 
 export default function ServicesSection() {
   const featured = services.slice(0, 6);
+  const [hoveredCard, setHoveredCard] = useState(null);
+
+  const getServiceType = (index) => {
+    const types = ['residential', 'commercial', 'renovation'];
+    return types[index % types.length];
+  };
 
   return (
     <section className="py-20 sm:py-28 bg-brand-black relative overflow-hidden">
@@ -62,10 +70,20 @@ export default function ServicesSection() {
               key={service.id}
               variants={fadeUp}
               custom={index}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
               whileHover={{ y: -10, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="group relative bg-brand-charcoal border border-white/5 rounded-sm overflow-hidden hover:border-brand-gold/30 hover:shadow-2xl hover:shadow-brand-gold/10"
             >
+              {/* 3D Background Canvas */}
+              <div className="absolute inset-0 w-full h-full opacity-30">
+                <ServiceCard3D 
+                  type={getServiceType(index)} 
+                  isHovered={hoveredCard === index} 
+                />
+              </div>
+
               {/* Service Number Badge */}
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}

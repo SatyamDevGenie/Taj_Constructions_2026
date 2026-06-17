@@ -3,6 +3,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import SectionHeading from "../ui/SectionHeading";
 import Button from "../ui/Button";
 import { AnimatedCounter } from "../../utils/animations";
+import AboutBackground3D from "../3d/AboutBackground3D";
 
 const stats = [
   { value: 98, suffix: "%", label: "Successful Projects" },
@@ -18,6 +19,11 @@ export default function AboutSection() {
 
   return (
     <section className="pt-40 sm:pt-48 pb-20 sm:pb-28 bg-brand-cream relative overflow-hidden">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <AboutBackground3D />
+      </div>
+
       {/* Decorative Elements */}
       <motion.div
         animate={{ 
@@ -25,7 +31,7 @@ export default function AboutSection() {
           scale: [1, 1.1, 1]
         }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="absolute top-20 right-10 w-32 h-32 border-4 border-brand-gold/10 rounded-full"
+        className="absolute top-20 right-10 w-32 h-32 border-4 border-brand-gold/10 rounded-full z-[1]"
       />
       <motion.div
         animate={{ 
@@ -33,7 +39,7 @@ export default function AboutSection() {
           scale: [1, 1.2, 1]
         }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-20 left-10 w-24 h-24 border-4 border-brand-gold/10 rounded-full"
+        className="absolute bottom-20 left-10 w-24 h-24 border-4 border-brand-gold/10 rounded-full z-[1]"
       />
 
       <div className="container-tight relative z-10">

@@ -5,13 +5,19 @@ import SectionHeading from "../ui/SectionHeading";
 import Button from "../ui/Button";
 import { blogs } from "../../data/blogs";
 import { fadeUp, staggerContainer } from "../../utils/animations";
+import FloatingCity3D from "../3d/FloatingCity3D";
 
 export default function CtaSection() {
   return (
     <section className="relative py-24 sm:py-32 overflow-hidden">
+      {/* 3D City Background */}
+      <div className="absolute inset-0 opacity-20">
+        <FloatingCity3D />
+      </div>
+
       {/* Parallax Background */}
       <motion.div 
-        className="absolute inset-0"
+        className="absolute inset-0 z-[1]"
         initial={{ scale: 1.1 }}
         whileInView={{ scale: 1 }}
         transition={{ duration: 1.5 }}
@@ -20,16 +26,16 @@ export default function CtaSection() {
         <img
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
           alt=""
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover mix-blend-overlay opacity-40"
         />
-        <div className="absolute inset-0 bg-brand-black/85" />
+        <div className="absolute inset-0 bg-brand-black/90" />
       </motion.div>
 
       {/* Animated Particles */}
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-brand-gold/30 rounded-full"
+          className="absolute w-2 h-2 bg-brand-gold/30 rounded-full z-[2]"
           animate={{
             y: [0, -100, 0],
             x: [0, Math.random() * 50 - 25, 0],

@@ -1,22 +1,54 @@
 import { motion } from "framer-motion";
 import { FaPlay, FaArrowRight } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import Button from "../ui/Button";
+import Hero3D from "../3d/Hero3D";
 
 export default function HeroSection() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 2 - 1,
+        y: -(e.clientY / window.innerHeight) * 2 + 1
+      });
+    };
+
+    const handleScroll = () => {
+      const progress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <section className="relative min-h-[90vh] lg:min-h-screen flex items-center overflow-hidden">
+      {/* 3D Canvas Background */}
+      <div className="absolute inset-0 z-0">
+        <Hero3D mousePosition={mousePosition} scrollProgress={scrollProgress} />
+      </div>
+
       {/* Animated Background with Parallax */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-[1] pointer-events-none">
         <motion.div
           initial={{ scale: 1.2, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          animate={{ scale: 1, opacity: 0.3 }}
           transition={{ duration: 1.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="w-full h-full"
         >
           <img
             src="https://images.unsplash.com/photo-1600210492486-724fe621c853?w=1920&q=80"
             alt="Modern home interior"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover mix-blend-overlay"
           />
         </motion.div>
 
@@ -25,13 +57,13 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="absolute inset-0 bg-hero-gradient"
+          className="absolute inset-0 bg-gradient-radial from-transparent via-brand-black/60 to-brand-black/90"
         />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-brand-black/40 to-transparent"
         />
 
         {/* Floating Particles Effect */}
